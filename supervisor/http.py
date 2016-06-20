@@ -324,6 +324,8 @@ class deferring_http_request(http_server.http_request):
         else:
             host = hostname + ':' + port
         server_url = '%s://%s' % (protocol, host)
+        if 'HTTP_X_SUPERVISOR_SERVER_URL' in environ:
+            server_url = environ['HTTP_X_SUPERVISOR_SERVER_URL']
         if server_url[-1:]=='/':
             server_url=server_url[:-1]
         return server_url
